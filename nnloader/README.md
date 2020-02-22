@@ -1,7 +1,7 @@
 # NN Loader
 
 This tools will allow to upload a Neural Network Architecture Definition via JSON file as per the following example:
-'''
+```
 {
     "nnlayers": {
 	"X": {
@@ -55,6 +55,6 @@ This tools will allow to upload a Neural Network Architecture Definition via JSO
 	}
     }
 }
-'''
+```
 
 Necessary REST endpoints are exposed for this purpose.
