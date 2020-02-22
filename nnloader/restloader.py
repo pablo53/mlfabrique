@@ -30,12 +30,12 @@ def ping():
 def insert_architecture():
     archjson = request.json
     print(archjson, flush=True)
-    arch_id = archs.insert_one(archjson).inserted_id
+    arch_id = archs.insert_one({"architecture": archjson}).inserted_id
     return str(arch_id)
 
 
 @app.route('/architecture/<arch_id>', methods=['GET'])
 def get_architecture(arch_id):
     arch = archs.find_one({"_id": ObjectId(arch_id)})
-    return str(arch)
+    return str(arch['architecture'])
 
