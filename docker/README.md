@@ -1,7 +1,7 @@
 # Docker Compose files
 
 This directory contains scripts for installing Docker Compose and start/stop all the containers prepared previously in subprojects.
-That is, if, for a sub project called ```$SUBPROJECT```, both ```$SUBPROJECT/Dockerfile``` and ```$SUBPROJECT/docker-build.sh``` files exist, the latter should be run.
+That is, if, for a sub project called ```$SUBPROJECT```, files ```$SUBPROJECT/Dockerfile*``` and ```$SUBPROJECT/docker-build.sh``` exist, the latter should be run.
 After running ```docker-build.sh``` files for each relevant sub-project, ```docker-compose``` can start/stop the whole ecosystem of MLFabrique.
 
 ## Installing ```docker-compose``` on Linux
