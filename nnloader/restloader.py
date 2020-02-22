@@ -5,6 +5,8 @@ from flask import request
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
+import nnmodel
+
 
 app = Flask(__name__)
 mongouri = os.getenv('MONGO_URI')
@@ -24,6 +26,17 @@ archs = mlfdb['nnarchs']
 @app.route('/ping', methods=['GET'])
 def ping():
     return "OK"
+
+
+@app.route('/info', methods=['GET'])
+def info():
+    inf_data = {
+        "nnmodel": {
+            "version": nnmodel.__version__,
+            "license": nnmodel.__license__
+        }
+    }
+    return str(inf_data)
 
 
 @app.route('/architecture', methods=['POST'])

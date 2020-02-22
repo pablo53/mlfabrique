@@ -5,6 +5,5 @@ RUN pip install -r requirements.txt
 RUN useradd --no-create-home --user-group mlfadmin
 RUN mkdir -p /opt/mlfabrique
 RUN chmod a+r,a+w,a+x /opt/mlfabrique
-USER mlfadmin
 
 WORKDIR /opt/mlfabrique

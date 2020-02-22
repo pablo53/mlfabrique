@@ -1,5 +1,8 @@
 FROM mlfabrique-nnloader-base:latest
 
+RUN mkdir -p /opt/mlfabrique/install
+COPY build/*.whl /opt/mlfabrique/install
+RUN pip install /opt/mlfabrique/install/*.whl
 USER mlfadmin
 RUN mkdir -p /opt/mlfabrique/nnloader
 RUN chmod a+r,a+w,a+x /opt/mlfabrique/nnloader
