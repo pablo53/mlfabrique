@@ -5,6 +5,8 @@ from flask import request
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
+import nnmodel
+
 
 app = Flask(__name__)
 mongouri = os.getenv('MONGO_URI')
@@ -29,22 +31,11 @@ def ping():
 @app.route('/info', methods=['GET'])
 def info():
     inf_data = {
-        "name": "nnloader",
-        "mongodb-uri": mongouri
+        "name": "nntrainer",
+        "mongodb-uri": mongouri,
+        "nnmodel": {
+            "version": nnmodel.__version__,
+            "license": nnmodel.__license__
+        }
     }
     return str(inf_data)
-
-
-@app.route('/architecture', methods=['POST'])
-def insert_architecture():
-    archjson = request.json
-    print(archjson, flush=True)
-    arch_id = archs.insert_one({"architecture": archjson}).inserted_id
-    return str(arch_id)
-
-
-@app.route('/architecture/<arch_id>', methods=['GET'])
-def get_architecture(arch_id):
-    arch = archs.find_one({"_id": ObjectId(arch_id)})
-    return str(arch['architecture'])
-

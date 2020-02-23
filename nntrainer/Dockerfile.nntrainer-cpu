@@ -1,0 +1,13 @@
+FROM mlfabrique-nntrainer-cpu-base:latest
+
+RUN mkdir -p /opt/mlfabrique/install
+COPY build/*.whl /opt/mlfabrique/install
+RUN pip install /opt/mlfabrique/install/*.whl
+USER mlfadmin
+RUN mkdir -p /opt/mlfabrique/nntrainer
+RUN chmod a+r,a+w,a+x /opt/mlfabrique/nntrainer
+COPY *.py /opt/mlfabrique/nntrainer
+
+EXPOSE 5000
+WORKDIR /opt/mlfabrique/nntrainer
+ENTRYPOINT FLASK_APP=restloader.py flask run --host=0.0.0.0

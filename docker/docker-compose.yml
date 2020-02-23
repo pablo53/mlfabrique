@@ -18,8 +18,39 @@ services:
   nnloader:
     container_name: "nnloader"
     image: "mlfabrique-nnloader:latest"
+    environment:
+      MONGO_HOST: ${MONGO_HOST:-mongodb}
+      MONGO_PORT: ${MONGO_PORT:-27017}
     ports:
       - "0.0.0.0:5000:5000"
+    networks:
+      - mlfabrique
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  nntrainer_cpu:
+    container_name: "nntrainer_cpu"
+    image: "mlfabrique-nntrainer-cpu:latest"
+    environment:
+      MONGO_HOST: ${MONGO_HOST:-mongodb}
+      MONGO_PORT: ${MONGO_PORT:-27017}
+    ports:
+      - "0.0.0.0:6000:5000"
+    networks:
+      - mlfabrique
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  nntrainer_gpu:
+    container_name: "nntrainer_gpu"
+    image: "mlfabrique-nntrainer-gpu:latest"
+    environment:
+      MONGO_HOST: ${MONGO_HOST:-mongodb}
+      MONGO_PORT: ${MONGO_PORT:-27017}
+    ports:
+      - "0.0.0.0:7000:5000"
     networks:
       - mlfabrique
     depends_on:
